@@ -1,5 +1,4 @@
-# [Learning
-Scala](http://techbus.safaribooksonline.com/book/programming/scala/9781449368814)
+# [Learning Scala](http://techbus.safaribooksonline.com/book/programming/scala/9781449368814)
 
 ## [Chapter 1. Getting Started with the Scalable Language](http://techbus.safaribooksonline.com/book/programming/scala/9781449368814/idot-core-scala/ch01_html)
 
