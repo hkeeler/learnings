@@ -73,11 +73,69 @@
 
 2. In the Scala REPL, convert the temperature value of 22.5 Centigrade to Fahrenheit. The conversion formula is cToF(x) = (x * 9/5) + 32.
 
+    **Answer:** Complete
+    ```scala
+    scala> val f = (22.8 * (9.0/5.0)) + 32
+    f: Double = 73.03999999999999
+    ```
+
 3. Take the result from exercise 2, halve it, and convert it back to Centigrade. You can use the generated constant variable (e.g., “res0”) instead of copying and pasting the value yourself.
+ 
+
+    **Answer:** Complete
+    ```scala
+    scala> val halfedC = ((f/2) - 32) * (5.0/9.0)
+    halfedC: Double = 2.511111111111109
+    ```
 
 4. The REPL can load and interpret Scala code from an external file with the :load <file> command. Create a new file named Hello.scala and add a command that will print a greeting, then execute it from the REPL.
+ 
+    **Answer:** Complete
+    ```
+    cd scala/books/learning-scala/exercises/
+    echo 'println("Hello!")' > ch1e4.scala
+    scala
+    
+    scala> :load ch1e4.scala
+    Loading ch1e4.scala...
+    Hello!
+    ```
 
 5. Another way to load external Scala code is to paste it into the REPL in “raw” mode, where the code is compiled as if it were actually in a proper source file. To do this, type :paste -raw, hit Return, and then paste the contents of your source file from exercise 4. After exiting “paste” mode you should see the greeting.
+
+    **Answer:** Incomplete
+    
+    1. Try to just paste is "as-is", but it failed.  Apparently REPL code ain't good enough.
+    ```scala
+    scala> :paste -raw
+    // Entering paste mode (ctrl-D to finish)
+
+    println("Hello!")
+
+    // Exiting paste mode, now interpreting.
+
+    <pastie>:1: error: expected class or object definition
+    println("Hello!")
+    ^
+    There were compilation errors!
+    ```
+    
+    1. Poked around SO and found http://stackoverflow.com/questions/15791856/how-do-i-compile-my-code-so-that-it-becomes-an-executable-jar-and-can-be-opened.  So...
+    ```
+    scala> :paste -raw
+    // Entering paste mode (ctrl-D to finish)
+
+    object HelloWorld {
+      def main(args: Array[String]) {
+        println("Hello!")
+      }
+    }
+
+    // Exiting paste mode, now interpreting.
+    ```
+    ...OK, so it didn't barf, but the code was not executed.  Not going to 
+
+
 
 
 ## [Chapter 2. Working with Data: Literals, Values, Variables, and Types](http://techbus.safaribooksonline.com/book/programming/scala/9781449368814/idot-core-scala/ch02_html)
