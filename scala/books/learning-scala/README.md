@@ -106,35 +106,34 @@
     **Answer:** Incomplete
     
     1. Try to just paste is "as-is", but it failed.  Apparently REPL code ain't good enough.
-    ```scala
-    scala> :paste -raw
-    // Entering paste mode (ctrl-D to finish)
+        ```scala
+        scala> :paste -raw
+        // Entering paste mode (ctrl-D to finish)
 
-    println("Hello!")
+        println("Hello!")
 
-    // Exiting paste mode, now interpreting.
+        // Exiting paste mode, now interpreting.
 
-    <pastie>:1: error: expected class or object definition
-    println("Hello!")
-    ^
-    There were compilation errors!
-    ```
+        <pastie>:1: error: expected class or object definition
+        println("Hello!")
+        ^
+        There were compilation errors!
+        ```
     
     1. Poked around SO and found http://stackoverflow.com/questions/15791856/how-do-i-compile-my-code-so-that-it-becomes-an-executable-jar-and-can-be-opened.  So...
-    ```
-    scala> :paste -raw
-    // Entering paste mode (ctrl-D to finish)
+        ```scala
+        scala> :paste -raw
+        // Entering paste mode (ctrl-D to finish)
 
-    object HelloWorld {
-      def main(args: Array[String]) {
-        println("Hello!")
-      }
-    }
+        object HelloWorld {
+            def main(args: Array[String]) {
+              println("Hello!")
+            }
+        }
 
-    // Exiting paste mode, now interpreting.
-    ```
+        // Exiting paste mode, now interpreting.
+        ```
     ...OK, so it didn't barf, but the code was not executed.  Not going to 
-
 
 
 
