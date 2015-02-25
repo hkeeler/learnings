@@ -133,7 +133,7 @@
 
         // Exiting paste mode, now interpreting.
         ```
-    ...OK, so it didn't barf, but the code was not executed.  Not going to 
+    ...OK, so it didn't barf, but the code was not executed.  Not going to spend any more time on this for now.
 
 
 
