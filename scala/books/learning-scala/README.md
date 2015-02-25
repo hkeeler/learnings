@@ -4,11 +4,68 @@
 
 ### Notes
 
+1. Installing Java 1.8 (Failed attempt)
+
+    1. Install Homebrew "java" Cask (Take 1)
+    
+            $ brew cask install java
+            ==> We need to make Caskroom for the first time at /opt/homebrew-cask/Caskroom
+            ==> We'll set permissions properly so we won't need sudo in the future
+    
+        Doh!  That won't work.  Don't have the root password on my Mac!
+        
+    1. Use writable "caskroom" directory, and try again (Take 2)
+
+            $ export HOMEBREW_CASK_OPTS="--caskroom=~/homebrew/Caskroom"
+            $ brew cask install java
+            Error: undefined method `cask' for main:Object
+            Please report this bug:
+                https://github.com/caskroom/homebrew-cask/issues
+            /Users/keelerh/homebrew/Library/Taps/caskroom/homebrew-cask/Casks/java.rb:1
+            /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+            /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/rubygems/custom_require.rb:31:in `require'
+            ...
+            
+        Hmmm.  Looks like a Homebrew issue.
+        
+    1. Update `brew-cask` and try again (Take 3) 
+    
+            $ brew update && brew upgrade brew-cask && brew cleanup && brew cask cleanup
+            $ brew cask install java
+            ==> Caveats
+            This Cask makes minor modifications to the JRE to prevent issues with
+            packaged applications, as discussed here:
+
+                https://bugs.eclipse.org/bugs/show_bug.cgi?id=411361
+
+            If your Java application still asks for JRE installation, you might need
+            to reboot or logout/login.
+
+            Installing this Cask means you have AGREED to the Oracle Binary Code
+            License Agreement for Java SE at
+
+                http://www.oracle.com/technetwork/java/javase/terms/license/index.html
+
+            ==> Downloading http://download.oracle.com/otn-pub/java/jdk/8u31-b13/jdk-8u31-macosx-x64.dmg
+            ######################################################################## 100.0%
+            ==> Running installer for java; your password may be necessary.
+            ==> Package installers may write to any location; options such as --appdir are ignored.
+            Password:
+            
+        Dammit!  Blocked again, and no way around this without help from the Helpdesk.
+        
+        I'll come back to this.  For now, Scala seems to run fine under the Java 1.6.x install on my Mac.
+            
+        **Note:** Upgrade instructions from [Updating/Upgrading the Homebrew-cask Tool](https://github.com/caskroom/homebrew-cask/blob/master/USAGE.md#updatingupgrading-the-homebrew-cask-tool)
+    
+    
 1. Installing Scala
 
         $ brew install scala
         $ scala -version
         Scala code runner version 2.11.4 -- Copyright 2002-2013, LAMP/EPFL
+        
+        Well, at least the `scala` install works without issue over Homebrew.
 
 ### Exercises
 
