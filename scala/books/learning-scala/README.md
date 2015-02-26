@@ -139,6 +139,11 @@
 
 ## [Chapter 2. Working with Data: Literals, Values, Variables, and Types](http://techbus.safaribooksonline.com/book/programming/scala/9781449368814/idot-core-scala/ch02_html)
 
+### Excercises
+
+
+## [Chapter 4. Functions](http://techbus.safaribooksonline.com/book/programming/scala/9781449368814/idot-core-scala/ch04_html)
+
 ### Terms
 
 * **functions** - named, reusable _expressions_.
@@ -154,13 +159,6 @@
 * **tail-recursion** - recursive invocation doesn’t create new stack space but instead uses the current function’s stack space.
     * Only functions whose last statement is the recursive invocation can be optimized for tail-recursion by the Scala compiler.
     * `@annotation.tailrec` - Scala compiler will attempt to optimized for tail-recursion, failing with compile error if it cannot.
-
-### Excercises
-
-
-## [Chapter 4. Functions](http://techbus.safaribooksonline.com/book/programming/scala/9781449368814/idot-core-scala/ch04_html)
-
-### Notes
 
 ### Excercises
 
