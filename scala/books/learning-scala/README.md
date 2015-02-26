@@ -139,8 +139,137 @@
 
 ## [Chapter 2. Working with Data: Literals, Values, Variables, and Types](http://techbus.safaribooksonline.com/book/programming/scala/9781449368814/idot-core-scala/ch02_html)
 
-### Notes
+### Terms
+
+* **functions** - named, reusable _expressions_.
+* **pure functions:** 
+    * Has one or more input parameters
+    * Performs calculations using only the input parameters
+    * Returns a value
+    * Always returns the same value for the same input
+    * Does not use or affect any data outside the function
+    * Is not affected by any data outside the function
+* **procedure** - _function_ that doesn’t have a return value
+* **recursive function** - _function_ that may invoke itself, preferably with some type of parameter or external condition that will be checked to avoid an infinite loop of function invocation.
+* **tail-recursion** - recursive invocation doesn’t create new stack space but instead uses the current function’s stack space.
+    * Only functions whose last statement is the recursive invocation can be optimized for tail-recursion by the Scala compiler.
+    * `@annotation.tailrec` - Scala compiler will attempt to optimized for tail-recursion, failing with compile error if it cannot.
 
 ### Excercises
 
 
+## [Chapter 4. Functions](http://techbus.safaribooksonline.com/book/programming/scala/9781449368814/idot-core-scala/ch04_html)
+
+### Notes
+
+### Excercises
+
+1. Write a function that computes the area of a circle given its radius.
+
+    **Answer:** Complete
+    ```scala
+scala> def area(radius:Double): Double = 3.14 * radius * radius
+area: (radius: Double)Double
+
+scala> area(4.556)
+res40: Double = 65.17740704
+    ```
+2. Provide an alternate form of the function in exercise 1 that takes the radius as a String. What happens if your function is invoked with an empty String ?
+
+    **Answer:** Complete
+    ```scala
+scala> def area(radius:String): Double = 3.14 * radius.toDouble * radius.toDouble
+area: (radius: String)Double
+
+scala> area("4.556")
+res38: Double = 65.17740704
+
+scala> area("")
+java.lang.NumberFormatException: empty String
+  at sun.misc.FloatingDecimal.readJavaFormatString(FloatingDecimal.java:992)
+  at java.lang.Double.parseDouble(Double.java:510)
+  at scala.collection.immutable.StringLike$class.toDouble(StringLike.scala:259)
+  at scala.collection.immutable.StringOps.toDouble(StringOps.scala:30)
+  at .area(<console>:7)
+  ... 33 elided
+    ```
+    
+1. Write a recursive function that prints the values from 5 to 50 by fives, without using for or while loops. Can you make it tail-recursive?
+ 
+    **Answer:** Complete
+
+    ```scala
+scala> @annotation.tailrec
+     | def increment(by:Int, max:Int, idx:Int = 0): Int = {
+     |   val inc = idx + by
+     |   println(inc)
+     |   if (inc == max) inc
+     |   else increment(by, max, inc)
+     | }
+increment: (by: Int, max: Int, idx: Int)Int
+
+scala> increment(5, 50)
+5
+10
+15
+20
+25
+30
+35
+40
+45
+50
+res3: Int = 50    
+    ```
+
+1. Write a function that takes a milliseconds value and returns a string describing the value in days, hours, minutes, and seconds. What’s the optimal type for the input value? 
+
+    **Answer:** Complete (but pretty sure this could be done more cleanly)
+    
+    ```scala
+scala> def millisToDateParts(millis:Long): String = {
+     |   val perSecond = 1000
+     |   val perMinute = perSecond * 60
+     |   val perHour = perMinute * 60
+     |   val perDay = perHour * 24
+     |
+     |   // Returns tuple of whole and remainder of division
+     |   def timePart(millis:Long, divideBy:Int): (Long, Long) = {
+     |     (millis / divideBy, millis % divideBy)
+     |   }
+     |
+     |   val days = timePart(millis, perDay)
+     |   val hours = timePart(days._2, perHour)
+     |   val minutes = timePart(hours._2, perMinute)
+     |   val seconds = timePart(minutes._2, perSecond)
+     |
+     |   s"${days._1} days, ${hours._1} hours, ${minutes._1} minutes, ${seconds._1} seconds"
+     | }
+millisToDateParts: (millis: Long)String
+
+scala> millisToDateParts(10)
+res0: String = 0 days, 0 hours, 0 minutes, 0 seconds
+
+scala> millisToDateParts(10000)
+res1: String = 0 days, 0 hours, 0 minutes, 10 seconds
+
+scala> millisToDateParts(100000)
+res2: String = 0 days, 0 hours, 1 minutes, 40 seconds
+
+scala> millisToDateParts(1000000)
+res3: String = 0 days, 0 hours, 16 minutes, 40 seconds
+
+scala> millisToDateParts(10000000)
+res4: String = 0 days, 2 hours, 46 minutes, 40 seconds
+
+scala> millisToDateParts(100000000)
+res5: String = 1 days, 3 hours, 46 minutes, 40 seconds
+
+scala> millisToDateParts(1000000000)
+res6: String = 11 days, 13 hours, 46 minutes, 40 seconds
+
+scala> millisToDateParts(1234567890)
+res7: String = 14 days, 6 hours, 56 minutes, 7 seconds
+    ```
+
+1. Write a function that calculates the first value raised to the exponent of the second value. Try writing this first using math.pow, then with your own calculation. Did you implement it with variables? Is there a solution available that only uses immutable data? Did you choose a numeric type that is large enough for your uses?
